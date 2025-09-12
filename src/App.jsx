@@ -4,7 +4,7 @@ import CafeList from './components/CafeList';
 import Filter from './components/Filter';
 import Detail from './components/Detail';
 import Popup from './components/Popup';
-import { otherFiltersConfig } from './services/filterConfig';
+import { otherFiltersConfig, filterConfig } from './services/filterConfig';
 
 // 필터 옵션 정의
 const FILTER_OPTIONS = {
@@ -176,7 +176,7 @@ function App() {
     if (view === 'filter') {
       return (
         <>
-          <Filter onFilterClick={setActivePopup} appliedFilters={appliedFilters} />
+          <Filter onFilterClick={setActivePopup} appliedFilters={appliedFilters} filterConfig={filterConfig} otherFiltersConfig={otherFiltersConfig} />
           <div className="filter-actions">
             <button className="filter-action-button reset-button" onClick={() => setAppliedFilters({})}>초기화</button>
             <button className="filter-action-button apply-button" onClick={applyFilters}>적용하기</button>
