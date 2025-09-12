@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "rd /s /q dist && vite build && copy public\\_redirects dist\\",
+    "clean": "rm -rf dist",
+    "vite-build": "vite build",
+    "copy-redirects": "cp public/_redirects dist/",
+    "build": "npm run clean && npm run vite-build && npm run copy-redirects",
     "lint": "eslint .",
     "preview": "vite preview"
   },
