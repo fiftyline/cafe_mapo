@@ -5,6 +5,9 @@ import Filter from './components/Filter';
 import Detail from './components/Detail';
 import Popup from './components/Popup';
 import { otherFiltersConfig, filterConfig } from './services/filterConfig';
+import arrowLeftSvg from './assets/arrow-left.svg';
+import closeSvg from './assets/close.svg';
+import searchSvg from './assets/search.svg';
 
 // 필터 옵션 정의
 const FILTER_OPTIONS = {
@@ -131,7 +134,7 @@ function App() {
       return (
         <div className="detail-header">
           <button className="back-button" onClick={() => setView('list')}>
-            <img src="/src/assets/arrow-left.svg" alt="Back" />
+            <img src={arrowLeftSvg} alt="Back" />
           </button>
           <h1 className="detail-title">{selectedCafe?.base}</h1>
         </div>
@@ -142,7 +145,7 @@ function App() {
         <div className="filter-screen-header">
           <h1 className="filter-screen-title">카페 상세 필터링</h1>
           <button className="close-button" onClick={() => setView('list')}>
-             <img src="/src/assets/close.svg" alt="Close" />
+             <img src={closeSvg} alt="Close" />
           </button>
         </div>
       );
@@ -155,7 +158,7 @@ function App() {
         </div>
         <div className="search-bar-container">
           <div className="search-bar-icon-wrapper">
-            <img src="/src/assets/search.svg" alt="Search" className="search-icon" />
+            <img src={searchSvg} alt="Search" className="search-icon" />
           </div>
           <input
             type="text"
