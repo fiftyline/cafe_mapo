@@ -171,7 +171,7 @@ body {
   justify-content: center;
   align-items: center;
   gap: 8px;
-  width: 100%;
+  /* width: 100%; Removed width */
   border-radius: 12px;
   background: #12A3ED; /* Changed color */
   color: #F7FAFC;
@@ -187,17 +187,19 @@ body {
   bottom: 0;
   width: 100%; /* Adjusted width */
   max-width: 390px; /* Same as app-container width */
-  padding: 16px;
+  padding: 16px; /* Existing padding */
   background: none; /* Removed background */
   box-shadow: none; /* Removed shadow */
   z-index: 1000;
   left: 50%; /* Center the container */
   transform: translateX(-50%); /* Center the container */
+  box-sizing: border-box; /* Include padding in width */
 }
 
 .fixed-bottom-button-container .filter-button {
   margin: 0; /* Override previous margin */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Added shadow */
+  width: 100%; /* Ensure button fills the container's content area */
 }
 
 /* Cafe List */
