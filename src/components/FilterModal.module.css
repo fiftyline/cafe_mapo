@@ -1,0 +1,148 @@
+/* src/components/FilterModal.module.css */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: var(--white);
+  border-radius: 16px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.header {
+  padding: 16px;
+  border-bottom: 1px solid var(--gray);
+}
+
+.header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.filterGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.filterOption {
+  display: flex;
+  padding: 16px;
+  align-items: center;
+  gap: 12px;
+  flex: 1 0 0;
+  align-self: stretch;
+  border-radius: 8px;
+  border: 1px solid #CFDEE8;
+  background: #F7FAFC;
+  cursor: pointer;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.elementName {
+  color: #0D171C;
+  font-feature-settings: 'dlig' on;
+  font-family: Pretendard;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px; /* 153.846% */
+}
+
+.selectedValue {
+  color: #4D8099;
+  font-feature-settings: 'dlig' on;
+  font-family: Pretendard;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 153.846% */
+}
+
+.otherFilters {
+    padding: 0 24px 24px 24px;
+}
+
+.otherFilters h4 {
+    margin: 0 0 12px 0;
+    font-size: 1rem;
+    color: var(--dark-gray);
+}
+
+.otherFilterButtons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.otherButton {
+    padding: 8px 16px;
+    border: 1px solid var(--gray);
+    background-color: var(--white);
+    color: var(--black);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.otherButton.selected {
+    background-color: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
+}
+
+.footer {
+  display: flex;
+  padding: 16px;
+  border-top: 1px solid var(--gray);
+}
+
+.resetButton, .applyButton {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.resetButton {
+  background-color: var(--gray);
+  color: var(--black);
+  margin-right: 8px;
+}
+
+.applyButton {
+  background-color: var(--accent);
+  color: var(--white);
+  margin-left: 8px;
+}

@@ -1,0 +1,76 @@
+/* src/components/Detail.module.css */
+.detailScreen {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.detailImage {
+    width: 100%;
+    height: 200px;
+    background-color: #e0e0e0; /* Placeholder */
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.detailContent {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.detailSectionTitle {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.detailGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.detailGridItem {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #eee;
+}
+
+.filterItemName {
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.value {
+    color: #007bff;
+    font-size: 0.9rem;
+}
+
+/* 추가적인 스타일링 */
+.detailItemKey {
+    font-weight: 600;
+    color: #0D171C;
+    font-size: 13px;
+    line-height: 20px;
+}
+
+.detailItemValue {
+    color: #4D8099;
+    font-size: 13px;
+    line-height: 20px;
+}
+
+.detailItem {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}

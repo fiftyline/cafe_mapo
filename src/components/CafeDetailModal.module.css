@@ -1,0 +1,84 @@
+
+/* src/components/CafeDetailModal.module.css */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1200;
+}
+
+.modal {
+  background-color: var(--white);
+  border-radius: 16px;
+  width: 90%;
+  max-width: 600px;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--gray);
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--dark-gray);
+}
+
+.content {
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.imagePlaceholder {
+  height: 250px;
+  background-color: var(--gray);
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+.detailList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.detailItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--gray);
+}
+
+.detailItem:last-child {
+  border-bottom: none;
+}
+
+.detailKey {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.detailValue {
+  color: var(--black);
+}

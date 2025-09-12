@@ -1,0 +1,55 @@
+
+/* src/components/CafeCard.module.css */
+.card {
+  background-color: var(--white);
+  border-radius: 12px;
+  margin: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.imagePlaceholder {
+  height: 180px;
+  background-color: var(--gray);
+  /* TODO: 실제 카페 이미지를 삽입할 경우 background-image 속성 사용 */
+}
+
+.content {
+  padding: 16px;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: var(--black);
+}
+
+.location {
+  font-size: 0.9rem;
+  color: var(--dark-gray);
+  margin: 0 0 12px 0;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  background-color: var(--gray);
+  color: #4D8099;
+  padding: 4px 8px;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}

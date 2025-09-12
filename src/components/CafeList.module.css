@@ -1,0 +1,75 @@
+/* src/components/CafeList.module.css */
+.cafeList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+}
+
+.cafeItem {
+  display: flex;
+  min-height: 72px;
+  padding: 8px 16px;
+  align-items: center;
+  gap: 16px;
+  align-self: stretch;
+  border-bottom: 1px solid #E8F0F2;
+  cursor: pointer;
+}
+
+.cafeItemImage {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  background: #E8F0F2;
+  flex-shrink: 0;
+}
+
+.cafeItemInfo {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.cafeItemName {
+  color: #0D171C;
+  font-feature-settings: 'dlig' on;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+}
+
+.cafeLocationAndMenu {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cafeLocation,
+.cafeMenu {
+  color: #4D8099;
+  font-feature-settings: 'dlig' on;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 21px; /* 150% */
+}
+
+.separator {
+  color: #4D8099;
+  font-feature-settings: 'dlig' on;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 21px; /* 150% */
+}
+
+@media (max-width: 768px) {
+  .cafeList {
+    grid-template-columns: 1fr;
+  }
+}
