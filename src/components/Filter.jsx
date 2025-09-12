@@ -30,8 +30,8 @@ const Filter = ({ onFilterClick, appliedFilters, filterConfig, otherFiltersConfi
               {appliedFilters[filter.label] === 'O' ? filter.label : ''}
             </span>
           </div>
-        })
-      )}
+        </div>
+      ))}
     </div>
   );
 };
