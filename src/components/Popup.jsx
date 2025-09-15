@@ -1,36 +1,52 @@
 import React, { useState, useEffect } from 'react';
 
-const Popup = ({ filter, options, selectedOptions: initialSelected, onClose, onApply }) => {
+const Popup = ({ filter, selectedOptions: initialSelected, onClose, onApply }) => {
   const [selectedOptions, setSelectedOptions] = useState(initialSelected);
 
   useEffect(() => {
     setSelectedOptions(initialSelected);
   }, [initialSelected]);
 
-  const handleOptionClick = (option) => {
+  const handleOptionClick = (optionValue) => {
     setSelectedOptions((prev) =>
-      prev.includes(option) ? prev.filter((o) => o !== option) : [...prev, option]
+      prev.includes(optionValue) ? prev.filter((o) => o !== optionValue) : [...prev, optionValue]
     );
   };
 
   const handleApply = () => {
-    onApply(filter, selectedOptions);
+    onApply(filter.label, selectedOptions);
+  };
+
+  const renderOptions = () => {
+    if (filter.type === 'chips') {
+      return filter.options.map((option) => (
+        <div
+          key={option.dbField}
+          className={`popup-option ${selectedOptions.includes(option.dbField) ? 'selected' : ''}`}
+          onClick={() => handleOptionClick(option.dbField)}
+        >
+          {option.label}
+        </div>
+      ));
+    } else {
+      return filter.options.map((option) => (
+        <div
+          key={option}
+          className={`popup-option ${selectedOptions.includes(option) ? 'selected' : ''}`}
+          onClick={() => handleOptionClick(option)}
+        >
+          {option}
+        </div>
+      ));
+    }
   };
 
   return (
     <div className="popup-overlay" onClick={onClose}> 
       <div className="popup" onClick={(e) => e.stopPropagation()}> 
-        <div className="popup-header">{filter}</div>
+        <div className="popup-header">{filter.label}</div>
         <div className="popup-options">
-          {options.map((option) => (
-            <div
-              key={option}
-              className={`popup-option ${selectedOptions.includes(option) ? 'selected' : ''}`}
-              onClick={() => handleOptionClick(option)}
-            >
-              {option}
-            </div>
-          ))}
+          {renderOptions()}
         </div>
         <div className="popup-actions">
           <button className="filter-action-button reset-button" onClick={() => setSelectedOptions([])}>초기화</button>

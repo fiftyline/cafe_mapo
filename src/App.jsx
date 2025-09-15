@@ -4,27 +4,10 @@ import CafeList from './components/CafeList';
 import Filter from './components/Filter';
 import Detail from './components/Detail';
 import Popup from './components/Popup';
-import { otherFiltersConfig, filterConfig } from './services/filterConfig';
+import { filterConfig } from './services/filterConfig';
 import arrowLeftSvg from './assets/arrow-left.svg';
 import closeSvg from './assets/close.svg';
 import searchSvg from './assets/search.svg';
-
-// 필터 옵션 정의
-const FILTER_OPTIONS = {
-  목적: ['조용히 쉬기', '대화', '카공/작업', '정보없음'],
-  분위기: ['감성적', '모던', '빈티지', '특별함/개성있음', '정보없음'],
-  웨이팅: ['가끔있음', '긴 웨이팅', '정보부족'],
-  콘센트: ['있음', '많음', '정보부족'],
-  의자: ['편함', '정보부족'],
-  테이블: ['넓고 낮지않음', '좁거나 낮음', '정보부족'],
-  소음: ['조용함', '정보부족'],
-  조명: ['밝음', '어두움', '정보부족'],
-  '좌석 간격': ['넓음', '좁음', '정보부족'],
-  규모: ['적당함', '작은 편', '큰 편/대형카페', '정보부족'],
-  음료: ['맛있거나 평범', '월등히 맛있음', '정보부족'],
-  디저트: ['맛있거나 평범', '월등히 맛있음', '정보부족'],
-  '영업마감': ['8시 전', '11시 전', '24시간 영업', '정보부족'],
-};
 
 function App() {
   const [cafes, setCafes] = useState([]);
@@ -55,20 +38,18 @@ function App() {
     // Apply filters to the query
     Object.keys(appliedFilters).forEach(filterName => {
       const filterValue = appliedFilters[filterName];
+      const config = filterConfig.find(f => f.label === filterName);
 
-      if (filterValue === undefined || (Array.isArray(filterValue) && filterValue.length === 0)) {
+      if (!config || filterValue === undefined || (Array.isArray(filterValue) && filterValue.length === 0)) {
         return;
       }
 
-      const isOtherFilter = otherFiltersConfig.some(f => f.label === filterName);
-
-      if (isOtherFilter) {
-        if (filterValue === 'O') {
-          query = query.eq(filterName, 'O');
-        }
+      if (config.type === 'chips') {
+        filterValue.forEach(dbField => {
+          query = query.eq(dbField, 'O');
+        });
       } else {
-        const selectedOptions = filterValue;
-        query = query.in(filterName, selectedOptions);
+        query = query.in(config.dbField, filterValue);
       }
     });
 
@@ -117,17 +98,12 @@ function App() {
     fetchQuery();
   }, [page, appliedFilters, searchTerm]);
 
-  const fetchCafesData = async (currentPage, currentSize, filters) => {
-    // This function is no longer needed as useEffect handles data fetching
-  };
-
   const loadMoreCafes = () => {
     if (hasMore && !loading) {
       setPage(prevPage => prevPage + 1);
     }
   };
 
-  // 필터 적용 로직
   const applyFilters = () => {
     setCafes([]);
     setFilteredCafes([]);
@@ -136,18 +112,8 @@ function App() {
     setView('list');
   };
 
-  // 팝업에서 필터 적용시
-  const handlePopupApply = (filter, options) => {
-    if (otherFiltersConfig.some(f => f.label === filter)) {
-      // Handle '기타' filters
-      setAppliedFilters(prev => ({
-        ...prev,
-        [filter]: options.length > 0 ? 'O' : undefined,
-      }));
-    } else {
-      // Handle regular filters
-      setAppliedFilters(prev => ({ ...prev, [filter]: options }));
-    }
+  const handlePopupApply = (filterLabel, selected) => {
+    setAppliedFilters(prev => ({ ...prev, [filterLabel]: selected }));
     setActivePopup(null);
   };
 
@@ -204,12 +170,12 @@ function App() {
 
   const renderContent = () => {
     if (view === 'detail') {
-      return <Detail cafe={selectedCafe} appliedFilters={appliedFilters} />;
+      return <Detail cafe={selectedCafe} />;
     }
     if (view === 'filter') {
       return (
         <>
-          <Filter onFilterClick={setActivePopup} appliedFilters={appliedFilters} filterConfig={filterConfig} otherFiltersConfig={otherFiltersConfig} />
+          <Filter onFilterClick={setActivePopup} appliedFilters={appliedFilters} filterConfig={filterConfig} />
           <div className="filter-actions">
             <button className="filter-action-button reset-button" onClick={() => setAppliedFilters({})}>초기화</button>
             <button className="filter-action-button apply-button" onClick={applyFilters}>적용하기</button>
@@ -247,12 +213,7 @@ function App() {
       {activePopup && (
         <Popup
           filter={activePopup}
-          options={FILTER_OPTIONS[activePopup] || []} // Ensure options is always an array
-          selectedOptions={
-            otherFiltersConfig.some(f => f.label === activePopup) && appliedFilters[activePopup] === 'O'
-              ? [activePopup] // For '기타' filters, if 'O' is applied, pass the filter label as selected
-              : appliedFilters[activePopup] || [] // For regular filters, pass the array of selected options
-          }
+          selectedOptions={appliedFilters[activePopup.label] || []}
           onClose={() => setActivePopup(null)}
           onApply={handlePopupApply}
         />

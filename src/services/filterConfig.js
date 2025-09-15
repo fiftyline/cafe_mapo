@@ -1,4 +1,3 @@
-
 // src/services/filterConfig.js
 
 // 필터링 옵션들을 중앙에서 관리하기 위한 설정 파일
@@ -104,13 +103,21 @@ export const filterConfig = [
     icon: getIcon('time'),
     options: ['8시 전', '11시 전', '24시간 영업', '정보부족'],
   },
+  {
+    id: 'other',
+    label: '기타',
+    dbField: '기타',
+    icon: getIcon('other'),
+    type: 'chips', // 팝업 렌더링 타입을 지정
+    options: [
+      { label: '깨끗한 화장실', dbField: '화장실' },
+      { label: '주차', dbField: '주차' },
+      { label: '단체석', dbField: '단체석' },
+      { label: '뷰', dbField: '뷰' },
+      { label: '반려동물', dbField: '반려동물' },
+    ]
+  }
 ];
 
-// '기타' 항목들은 별도로 관리 (값이 'O'인지 여부만 확인)
-export const otherFiltersConfig = [
-    { id: 'restroom', label: '화장실', dbField: '화장실' },
-    { id: 'parking', label: '주차', dbField: '주차' },
-    { id: 'groupSeat', label: '단체석', dbField: '단체석' },
-    { id: 'view', label: '뷰', dbField: '뷰' },
-    { id: 'pet', label: '반려동물', dbField: '반려동물' },
-];
+// '기타' 항목들은 filterConfig로 통합되었으므로 이 설정은 더 이상 필요 없습니다.
+export const otherFiltersConfig = [];

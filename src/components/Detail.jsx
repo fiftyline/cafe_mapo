@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import supabase from '../services/supabaseClient';
 import styles from './Detail.module.css';
-import { otherFiltersConfig } from '../services/filterConfig';
-import ImageCarouselModal from './ImageCarouselModal'; // Import the modal component
+import { filterConfig } from '../services/filterConfig';
+import ImageCarouselModal from './ImageCarouselModal';
 
 const Detail = ({ cafe }) => {
   const [images, setImages] = useState([]);
@@ -36,21 +36,27 @@ const Detail = ({ cafe }) => {
 
   if (!cafe) return null;
 
-  const featureOrder = [
-    '추천메뉴', '목적', '분위기', '웨이팅', '콘센트', '의자', '테이블', '소음', '조명', '좌석 간격', '규모', '음료', '디저트', '영업마감'
-  ];
+  // Find the '기타' config and build the feature string
+  const otherFilterConfig = filterConfig.find(f => f.id === 'other');
+  const otherFeatureLabels = [];
+  if (otherFilterConfig) {
+    otherFilterConfig.options.forEach(option => {
+      if (cafe[option.dbField] === 'O') {
+        otherFeatureLabels.push(option.label);
+      }
+    });
+  }
 
-  const otherFeatures = otherFiltersConfig.map(f => f.label);
+  const renderFeature = (key, value, className) => {
+    if (!value || value.length === 0 || value === '정보없음' || value === '정보부족') return null;
 
-  const renderFeature = (key, value) => {
-    if (!value || value === '정보없음' || value === '정보부족') return null;
-
-    let displayValue = value;
-    if (value === 'O') displayValue = '있음';
-    if (value === 'X') displayValue = '없음';
+    let displayValue = Array.isArray(value) ? value.join(', ') : value;
+    if (displayValue === 'O') displayValue = '있음';
+    if (displayValue === 'X') displayValue = '없음';
+    if (displayValue.trim() === '') return null;
 
     return (
-      <div key={key} className={styles.detailItem}>
+      <div className={`${styles.featureItem} ${className}`}>
         <span className={styles.detailItemKey}>{key}</span>
         <span className={styles.detailItemValue}>{displayValue}</span>
       </div>
@@ -66,19 +72,28 @@ const Detail = ({ cafe }) => {
               key={index}
               className={styles.detailImage}
               style={{ backgroundImage: `url(${image.og_image_url})` }}
-              onClick={() => handleImageClick(index)} // Add click handler
+              onClick={() => handleImageClick(index)}
             ></div>
           ))}
         </div>
         <div className={styles.detailContent}>
           <div className={styles.detailSectionTitle}>카페 특징</div>
-          <div className={styles.detailGrid}>
-            {featureOrder.map(feature => (
-              cafe[feature] ? renderFeature(feature, cafe[feature]) : null
-            ))}
-            {otherFeatures.map(feature => (
-              cafe[feature] === 'O' ? renderFeature(feature, cafe[feature]) : null
-            ))}
+          <div className={styles.featureGrid}>
+            {renderFeature('추천메뉴', cafe['추천메뉴'], styles.colSpan6)}
+            {renderFeature('목적', cafe['목적'], styles.colSpan2)}
+            {renderFeature('분위기', cafe['분위기'], styles.colSpan2)}
+            {renderFeature('웨이팅', cafe['웨이팅'], styles.colSpan2)}
+            {renderFeature('의자', cafe['의자'], styles.colSpan2)}
+            {renderFeature('테이블', cafe['테이블'], styles.colSpan2)}
+            {renderFeature('콘센트', cafe['콘센트'], styles.colSpan2)}
+            {renderFeature('소음', cafe['소음'], styles.colSpan3)}
+            {renderFeature('조명', cafe['조명'], styles.colSpan3)}
+            {renderFeature('좌석 간격', cafe['좌석 간격'], styles.colSpan3)}
+            {renderFeature('규모', cafe['규모'], styles.colSpan3)}
+            {renderFeature('음료', cafe['음료'], styles.colSpan3)}
+            {renderFeature('디저트', cafe['디저트'], styles.colSpan3)}
+            {renderFeature('영업마감', cafe['영업마감'], styles.colSpan3)}
+            {renderFeature('기타', otherFeatureLabels, styles.colSpan3)}
           </div>
         </div>
       </div>
