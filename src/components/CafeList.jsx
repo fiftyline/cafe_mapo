@@ -13,7 +13,7 @@ const CafeList = ({ cafes, onCafeClick, loadMoreCafes, hasMore, loading }) => {
           loadMoreCafes();
         }
       },
-      { threshold: 1.0 }
+      { threshold: 0.1 } // Changed threshold to 0.1
     );
 
     observer.observe(bottomRef.current);
