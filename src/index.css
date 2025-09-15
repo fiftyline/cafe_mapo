@@ -73,7 +73,8 @@ body {
   min-height: 844px;
   background: #FFF;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  position: relative; /* For fixed positioning of button */
+  position: relative;
+  padding-bottom: 90px; /* Add padding to prevent content from being hidden by fixed buttons */
 }
 
 /* Header */
@@ -171,35 +172,54 @@ body {
   justify-content: center;
   align-items: center;
   gap: 8px;
-  /* width: 100%; Removed width */
   border-radius: 12px;
-  background: #12A3ED; /* Changed color */
+  background: #12A3ED;
   color: #F7FAFC;
   font-size: 16px;
   font-weight: 700;
   border: none;
   cursor: pointer;
+  width: 100%;
 }
 
-/* Fixed Bottom Button */
+/* Fixed Bottom Button (Main Screen) */
 .fixed-bottom-button-container {
   position: fixed;
   bottom: 0;
-  width: 100%; /* Adjusted width */
-  max-width: 390px; /* Same as app-container width */
-  padding: 16px; /* Existing padding */
-  background: none; /* Removed background */
-  box-shadow: none; /* Removed shadow */
-  z-index: 1000;
-  left: 50%; /* Center the container */
-  transform: translateX(-50%); /* Center the container */
-  box-sizing: border-box; /* Include padding in width */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 390px;
+  padding: 16px;
+  padding-bottom: 24px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 100%);
+  z-index: 10;
+  box-sizing: border-box;
 }
 
 .fixed-bottom-button-container .filter-button {
-  margin: 0; /* Override previous margin */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Added shadow */
-  width: 100%; /* Ensure button fills the container's content area */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Fixed Bottom Actions (Filter Screen) */
+.fixed-bottom-actions-container {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 390px; /* Match app container width */
+  background: transparent;
+  padding: 16px;
+  padding-bottom: 24px; /* Extra padding for home bar on iOS */
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+.fixed-bottom-actions-container .filter-action-button {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* Cafe List */
@@ -300,11 +320,6 @@ body {
   font-weight: 700;
 }
 
-.filter-actions {
-    display: flex;
-    padding: 12px 16px;
-    gap: 8px;
-}
 .filter-action-button {
     height: 48px;
     border-radius: 12px;
@@ -315,13 +330,14 @@ body {
     flex-grow: 1;
 }
 .reset-button { background: #E8F0F2; color: #0D171C; }
-.apply-button { background: #12A3ED; color: #F7FAFC; } /* Changed color */
+.apply-button { background: #12A3ED; color: #F7FAFC; }
 
 /* Popup */
 .popup-overlay { 
     position: fixed; inset: 0; 
     background: rgba(0, 0, 0, 0.5); 
     display: flex; justify-content: center; align-items: center; 
+    z-index: 100;
 }
 .popup { 
     width: 360px; 

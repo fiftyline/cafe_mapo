@@ -176,7 +176,7 @@ function App() {
       return (
         <>
           <Filter onFilterClick={setActivePopup} appliedFilters={appliedFilters} filterConfig={filterConfig} />
-          <div className="filter-actions">
+          <div className="fixed-bottom-actions-container">
             <button className="filter-action-button reset-button" onClick={() => setAppliedFilters({})}>초기화</button>
             <button className="filter-action-button apply-button" onClick={applyFilters}>적용하기</button>
           </div>
