@@ -77,11 +77,41 @@ function App() {
 
       if (error) {
         console.error('Error fetching cafes:', error);
-      } else {
-        setCafes(prevCafes => (page === 0 ? data : [...prevCafes, ...data]));
-        setFilteredCafes(prevFilteredCafes => (page === 0 ? data : [...prevFilteredCafes, ...data]));
-        setHasMore(data.length === pageSize);
+        setLoading(false);
+        return;
       }
+      
+      const cafeBases = data.map(cafe => cafe.base);
+      let cafesWithImages = [...data];
+
+      if (cafeBases.length > 0) {
+        const { data: imagesData, error: imagesError } = await supabase.rpc('get_primary_images_for_bases', { bases: cafeBases });
+
+        if (imagesError) {
+          console.error('Error fetching primary images:', imagesError);
+        } else {
+          const primaryImages = imagesData.reduce((acc, img) => {
+            acc[img.base] = img.og_image_url;
+            return acc;
+          }, {});
+
+          cafesWithImages = data.map(cafe => ({
+            ...cafe,
+            thumbnailUrl: primaryImages[cafe.base] || null,
+          }));
+        }
+      }
+      
+      const updateState = (prevState) => {
+        if (page === 0) return cafesWithImages;
+        const existingIds = new Set(prevState.map(c => c.id));
+        const newCafes = cafesWithImages.filter(c => !existingIds.has(c.id));
+        return [...prevState, ...newCafes];
+      };
+
+      setCafes(updateState);
+      setFilteredCafes(updateState);
+      setHasMore(data.length === pageSize);
       setLoading(false);
     };
     fetchQuery();

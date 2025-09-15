@@ -29,7 +29,10 @@ const CafeList = ({ cafes, onCafeClick, loadMoreCafes, hasMore, loading }) => {
     <div className={styles.cafeList}>
       {cafes.map((cafe) => (
         <div key={cafe.id} className={styles.cafeItem} onClick={() => onCafeClick(cafe)}>
-          <div className={styles.cafeItemImage}></div>
+          <div
+            className={styles.cafeItemImage}
+            style={{ backgroundImage: cafe.thumbnailUrl ? `url(${cafe.thumbnailUrl})` : 'none' }}
+          ></div>
           <div className={styles.cafeItemInfo}>
             <div className={styles.cafeItemName}>{cafe.base}</div>
             <div className={styles.cafeLocationAndMenu}>

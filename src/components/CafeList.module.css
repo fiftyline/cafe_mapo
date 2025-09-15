@@ -21,7 +21,10 @@
   width: 56px;
   height: 56px;
   border-radius: 8px;
-  background: #E8F0F2;
+  background-color: #E8F0F2;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   flex-shrink: 0;
 }
 
