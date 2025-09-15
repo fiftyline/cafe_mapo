@@ -3,7 +3,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
-  padding: 24px;
+  padding: 12px 24px 24px;
   overflow-y: auto;
 }
 
@@ -18,6 +18,7 @@
   border: 1px solid #CFDEE8;
   background: #F7FAFC;
   cursor: pointer;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.05);
 }
 
 .icon {

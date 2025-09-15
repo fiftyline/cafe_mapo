@@ -28,7 +28,7 @@ function App() {
     const from = page * pageSize;
     const to = from + pageSize - 1;
 
-    let query = supabase.from('cafes').select('*');
+    let query = supabase.from('cafes').select('*').order('base', { ascending: true });
 
     // Apply search term
     if (searchTerm) {
@@ -85,8 +85,8 @@ function App() {
       
       const updateState = (prevState) => {
         if (page === 0) return cafesWithImages;
-        const existingIds = new Set(prevState.map(c => c.id));
-        const newCafes = cafesWithImages.filter(c => !existingIds.has(c.id));
+        const existingIds = new Set(prevState.map(c => c.base));
+        const newCafes = cafesWithImages.filter(c => !existingIds.has(c.base));
         return [...prevState, ...newCafes];
       };
 
@@ -139,10 +139,11 @@ function App() {
     if (view === 'filter') {
       return (
         <div className="filter-screen-header">
-          <h1 className="filter-screen-title">카페 상세 필터링</h1>
           <button className="close-button" onClick={() => setView('list')}>
              <img src={closeSvg} alt="Close" />
           </button>
+          <h1 className="filter-screen-title">카페 상세 필터링</h1>
+          <div className="header-spacer"></div>
         </div>
       );
     }

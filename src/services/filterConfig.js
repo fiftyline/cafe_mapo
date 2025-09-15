@@ -1,7 +1,5 @@
 // src/services/filterConfig.js
 
-// 필터링 옵션들을 중앙에서 관리하기 위한 설정 파일
-
 // 아이콘 경로를 동적으로 가져오기 위해 import.meta.glob 사용
 // Vite의 기능으로, assets 폴더 내의 모든 png 파일을 가져옵니다.
 const icons = import.meta.glob('../assets/*.png', { eager: true, query: '?url', import: 'default' });
