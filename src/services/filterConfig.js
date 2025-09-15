@@ -9,6 +9,7 @@ const getIcon = (name) => {
   return icons[`../assets/${name}.png`];
 };
 
+
 export const filterConfig = [
   {
     id: 'purpose',
@@ -85,14 +86,14 @@ export const filterConfig = [
     label: '음료',
     dbField: '음료',
     icon: getIcon('beverage'),
-    options: ['맛있거나 평범', '월등히 맛잇음', '정보부족'],
+    options: ['맛있거나 평범', '월등히 맛있음', '정보부족'],
   },
   {
     id: 'dessert',
     label: '디저트',
     dbField: '디저트',
     icon: getIcon('dessert'),
-    options: ['맛있거나 평범', '월등히 맛잇음', '정보부족'],
+    options: ['맛있거나 평범', '월등히 맛있음', '정보부족'],
   },
   {
     id: 'time',
