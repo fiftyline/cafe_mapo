@@ -3,6 +3,8 @@ import supabase from '../services/supabaseClient';
 import styles from './Detail.module.css';
 import { filterConfig } from '../services/filterConfig';
 import ImageCarouselModal from './ImageCarouselModal';
+import navermapIcon from '../assets/navermap.png';
+import kakaomapIcon from '../assets/kakaomap.png';
 
 const Detail = ({ cafe }) => {
   const [images, setImages] = useState([]);
@@ -77,7 +79,17 @@ const Detail = ({ cafe }) => {
           ))}
         </div>
         <div className={styles.detailContent}>
-          <div className={styles.detailSectionTitle}>카페 특징</div>
+          <div className={styles.detailSectionTitle}>
+            <span>카페 특징</span>
+            <div className={styles.mapIcons}>
+              <a href={cafe.navermap_url} target="_blank" rel="noopener noreferrer">
+                <img src={navermapIcon} alt="Naver Map" className={styles.mapIcon} />
+              </a>
+              <a href={cafe.kakaomap_url} target="_blank" rel="noopener noreferrer">
+                <img src={kakaomapIcon} alt="Kakao Map" className={styles.mapIcon} />
+              </a>
+            </div>
+          </div>
           <div className={styles.featureGrid}>
             {renderFeature('추천메뉴', cafe['추천메뉴'], styles.colSpan6)}
             {renderFeature('목적', cafe['목적'], styles.colSpan2)}

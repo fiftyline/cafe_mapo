@@ -36,6 +36,20 @@
     color: #333;
     border-bottom: 1px solid #eee;
     padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mapIcons {
+  display: flex;
+  gap: 8px;
+}
+
+.mapIcon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
 }
 
 .featureGrid {
